@@ -1,9 +1,9 @@
-class MyLinkedList {
+class MyLinkedList<E> {
 	class Node {
 	    private E element;
 	    private Node next, previous;
 
-	    public Node(Node before, Node after, Integer value) {
+	    public Node(Node before, Node after, E value) {
 		element = value;
 		previous = before;
 		next = after;
@@ -15,7 +15,7 @@ class MyLinkedList {
 	    public Node previous() {
 		return previous;
 	    }
-	    public Integer getValue() {
+	    public E getValue() {
 		return element;
 	    }
 	    public String toString() {
@@ -28,8 +28,8 @@ class MyLinkedList {
 	    public void setPrevious(Node newby) {
 		previous = newby;
 	    }
-	    public Integer setValue(Integer i) {
-		Integer old = element;
+	    public E setValue(E i) {
+		E old = element;
 		element = i;
 		return old;
 	    }
@@ -47,10 +47,17 @@ class MyLinkedList {
     	public int size() {
         	return size;
     	}
-    	public boolean add(Integer value) {
+    	public boolean addLast(E value) {
         	Node newNode = new Node(end.previous(), end, value);
         	newNode.previous().setNext(newNode);
         	end.setPrevious(newNode);
+        	size++;
+        	return true;
+    	}
+    	public boolean addFirst(E value) {
+        	Node newNode = new Node(start, start.next(), value);
+        	start.setNext(newNode);
+        	newNode.next().setPrevious(newNode);
         	size++;
         	return true;
     	}
@@ -64,20 +71,20 @@ class MyLinkedList {
         	return returns;
 	}
 
-    	public Integer get(int index) {
+    	public E get(int index) {
         	if (index < 0 || index >= size) {
             		throw new IndexOutOfBoundsException(index + " is not an index of this list");
         	}
         	return find(index).getValue();
     	}
-    	public boolean contains(Integer value) {
+    	public boolean contains(E value) {
         	Node checked = start.next();
         	while(checked != end && checked.getValue() != value) {
             		checked = checked.next();
         	}
         	return checked != end;
     	}
-    	public int indexOf(Integer value) {
+    	public int indexOf(E value) {
         	Node checked = start.next();
         	int index = 0;
         	while(checked != end && checked.getValue() != value) {
@@ -91,12 +98,12 @@ class MyLinkedList {
         	}
     	}
 
-    	public E set(int index, Integer value) {
+    	public E set(int index, E value) {
         	if (index < 0 || index >= size) {
             		throw new IndexOutOfBoundsException(index + " is not an index of this list");
         	}
         	Node foundIt = find(index);
-        	Integer old = foundIt.getValue();
+        	E old = foundIt.getValue();
         	foundIt.setValue(value);
         	return old;
     	}
