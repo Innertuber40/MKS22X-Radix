@@ -115,4 +115,9 @@ class MyLinkedList<E> {
         	}
         	return returns;
     	}
+
+	public void concat(MyLinkedList<E> last) {
+		end.previous().setNext(last.start.next());
+		last.start.next().setPrevious(end.previous());
+	}
 }
