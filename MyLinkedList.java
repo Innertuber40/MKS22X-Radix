@@ -35,12 +35,13 @@ class MyLinkedList<E> {
 	    }
 	}
 	private int size;
-	private Node start, end;
+	private Node start, end, current;
 
 	public MyLinkedList() {
         	start = new Node(null, end, null);
         	end = new Node(start, null, null);
         	start.setNext(end);
+		current = start;
         	size = 0;
     	}
 
@@ -77,6 +78,13 @@ class MyLinkedList<E> {
         	}
         	return find(index).getValue();
     	}
+	public Node getStart() {
+		return start;
+	}
+	public Node getEnd() {
+		return end;
+	}
+
     	public boolean contains(E value) {
         	Node checked = start.next();
         	while(checked != end && checked.getValue() != value) {
@@ -117,7 +125,16 @@ class MyLinkedList<E> {
     	}
 
 	public void concat(MyLinkedList<E> last) {
-		end.previous().setNext(last.start.next());
-		last.start.next().setPrevious(end.previous());
+		end.previous().setNext(last.getStart().next());
+		last.getStart().next().setPrevious(end.previous());
+		end = last.getEnd();
+	}
+
+	public boolean hasNext() {
+		return current.next() != end;
+	}
+	public E nextElement() {
+		current = current.next(); 
+		return current.getValue();
 	}
 }
