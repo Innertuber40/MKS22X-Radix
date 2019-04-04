@@ -1,6 +1,7 @@
 public class Radix {
 	public static void radixsort(int[] data) {
 		int layers = 0;
+		@SuppressWarnings("unchecked")
 		MyLinkedList<Integer>[] bucketDump = new MyLinkedList[20];
 		for (int i = 0; i < 20; i++) {
 			bucketDump[i] = new MyLinkedList<Integer>();

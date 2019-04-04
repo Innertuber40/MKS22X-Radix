@@ -32,7 +32,7 @@ public class TestDriver {
 			}
 			bigRandom[i] = (int)(Math.random() * 100000) * multiplier;
 		}
-		ArrayList<Integer> other = new ArrayList(10000);
+		ArrayList<Integer> other = new ArrayList<Integer>(10000);
 		for (int i = 0; i < 10000; i++) {
 			other.add(bigRandom[i]);
 		}
