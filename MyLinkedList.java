@@ -66,8 +66,8 @@ class MyLinkedList<E> {
 		Node now = start.next();
 		String returns = "";
 		while(now != end) {
-				returns = returns + now.toString() + " ";
-				now = now.next();
+			returns = returns + now.toString() + " ";
+			now = now.next();
 		}
 		return returns;
 	}
@@ -127,14 +127,22 @@ class MyLinkedList<E> {
 	public void concat(MyLinkedList<E> last) {
 		end.previous().setNext(last.getStart().next());
 		last.getStart().next().setPrevious(end.previous());
-		end = last.getEnd();
+		end.setPrevious(last.getEnd().previous());
+		end.previous().setNext(end);
+		size += last.size();
+		last.getStart().setNext(last.getEnd());
+		last.getEnd().setPrevious(last.getStart());
+		current = start;
 	}
 
 	public boolean hasNext() {
 		return current.next() != end;
 	}
 	public E nextElement() {
-		current = current.next(); 
+		current = current.next();
 		return current.getValue();
+	}
+	public void reset() {
+		current = start;
 	}
 }

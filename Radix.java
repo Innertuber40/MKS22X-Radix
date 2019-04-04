@@ -16,23 +16,42 @@ public class Radix {
 				bucketDump[value % 10].addLast(value);
 			}
 		}
-		MyLinkedList<Integer> catted = bucketDump[0];
-		for (int i = 1; i < 10; i++) {
-			catted.concat(bucketDump[i]);
-		}
-		int currentLayer = 2;
+		int currentLayer = 1;
 		while (currentLayer <= layers) {
+			MyLinkedList<Integer> catted = new MyLinkedList<Integer>();
+			for (int i = 0; i < 10; i++) {
+				catted.concat(bucketDump[i]);
+			}
 			while(catted.hasNext()) {
 				int value = catted.nextElement();
 				if (value < 0) {
-					bucketDump[Math.abs(value) / Math.pow(10, currentLayer) % 10].addFirst(value);
+					bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addFirst(value);
 				} else {
-					bucketDump[value % 10].addLast(value);
+					bucketDump[value / (int)Math.pow(10, currentLayer) % 10].addLast(value);
+				}
+			}
+			currentLayer++;
+		}
+		int currentIndex = 0;
+		for (int i = 0; i < 10; i++) {
+			if (bucketDump[i].hasNext()) {
+				int value = bucketDump[i].nextElement();
+				while (value < 0) {
+					data[currentIndex] = value;
+					if (bucketDump[i].hasNext()) {
+						value = bucketDump[i].nextElement();
+					} else {
+						value = 0;
+					}
+					currentIndex++;
 				}
 			}
 		}
-		for (int i = 0; i < data.length; i++) {
-			data[i] = catted.nextElement();
+		for (int i = 0; i < 10; i++) {
+			while (bucketDump[i].hasNext()) {
+				data[currentIndex] = bucketDump[i].nextElement();
+				currentIndex++;
+			}
 		}
 	}
 }	
