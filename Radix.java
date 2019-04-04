@@ -22,12 +22,12 @@ public class Radix {
 			for (int i = 0; i < 10; i++) {
 				catted.concat(bucketDump[i]);
 			}
-			System.out.println(catted);
 			while(catted.hasNext()) {
 				int value = catted.nextElement();
-				if (value < 0) {
+				if (value < 0 && currentLayer % 2 == 0) {
 					bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addBreakOff(value);
-					System.out.println(bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10]);
+				} else if(value < 0) {
+					bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addFirst(value);
 				} else {
 					bucketDump[value / (int)Math.pow(10, currentLayer) % 10].addLast(value);
 				}

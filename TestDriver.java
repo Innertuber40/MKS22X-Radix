@@ -16,7 +16,7 @@ public class TestDriver {
 			System.out.print(testList.nextElement() + " ");
 		}
 		System.out.println();
-		int[] testInts = new int[] {-645, 500, 43, 0, 0, -1, -9, 8, 9};
+		int[] testInts = new int[] {-645, 500, 43, 0, 0, -13455, -1, -1, -9, -1, -9, 8, 9};
 		Radix.radixsort(testInts);
 		for (int i = 0; i < testInts.length; i++) {
 			System.out.print(testInts[i] + " ");
