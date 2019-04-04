@@ -20,10 +20,11 @@ public class TestDriver {
 		System.out.println();
 		int[] testInts = new int[] {-645, 500, 43, 0, - 62, 0, -13455, -333, -44323, -5532, -1, -1, -9, -1, -9, 8, 9, -19};
 		Radix.radixsort(testInts);
-		for (int i = 0; i < testInts.length; i++) {
-			System.out.print(testInts[i] + " ");
+		for (int i = 0; i < testInts.length - 1; i++) {
+			System.out.print(testInts[i] + ", ");
 		}
-		/*int[] bigRandom = new int[10000];
+		System.out.print(testInts[testInts.length - 1]);
+		int[] bigRandom = new int[10000];
 		for (int i = 0; i < 10000; i++) {
 			int multiplier = -1;
 			if (Math.random() < 0.5) {
@@ -36,7 +37,7 @@ public class TestDriver {
 			other.add(bigRandom[i]);
 		}
 		System.out.println();
-		/*for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			if (other.get(i) != bigRandom[i]) {
 				System.out.println(false);
 			}
@@ -46,8 +47,8 @@ public class TestDriver {
 		//System.out.println(other);
 		for (int i = 0; i < 10000; i++) {
 			if (other.get(i) != bigRandom[i]) {
-				System.out.print(other.get(i) + " " + bigRandom[i] + " ");
+				System.out.println(false);
 			}
-		}*/
+		}
 	}
 }

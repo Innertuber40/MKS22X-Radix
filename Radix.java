@@ -23,16 +23,14 @@ public class Radix {
 			for (int i = 0; i < 10; i++) {
 				negaCatted.concat(bucketDump[i]);
 			}
-			System.out.println(negaCatted);
 			for (int i = 10; i < 20; i++) {
 				posiCatted.concat(bucketDump[i]);
 			}
-			System.out.println(posiCatted);
 			while(negaCatted.hasNext()) {
 				int value = negaCatted.nextElement();
 				bucketDump[9 - Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addLast(value);
 			}
-			while(negaCatted.hasNext()) {
+			while(posiCatted.hasNext()) {
 				int value = posiCatted.nextElement();
 				bucketDump[10 + value / (int)Math.pow(10, currentLayer) % 10].addLast(value);
 			}
@@ -43,9 +41,7 @@ public class Radix {
 			catted.concat(bucketDump[i]);
 		}
 		for (int i = 0; i < data.length; i++) {
-			while (catted.hasNext()) {
-				data[i] = catted.nextElement();
-			}
+			data[i] = catted.nextElement();
 		}
 	}
-}	
+}
