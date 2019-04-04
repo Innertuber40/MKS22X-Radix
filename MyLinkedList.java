@@ -35,14 +35,15 @@ class MyLinkedList<E> {
 	    }
 	}
 	private int size;
-	private Node start, end, current;
+	private Node start, end, breakoff, current;
 
 	public MyLinkedList() {
         start = new Node(null, end, null);
         end = new Node(start, null, null);
         start.setNext(end);
 		current = start;
-        size = 0;
+		size = 0;
+		breakoff = end;
     }
 
     public int size() {
@@ -53,12 +54,22 @@ class MyLinkedList<E> {
 		newNode.previous().setNext(newNode);
 		end.setPrevious(newNode);
 		size++;
+		if (size == 1) {
+			breakoff = breakoff.previous();
+		}
 		return true;
 	}
 	public boolean addFirst(E value) {
 		Node newNode = new Node(start, start.next(), value);
 		start.setNext(newNode);
 		newNode.next().setPrevious(newNode);
+		size++;
+		return true;
+	}
+	public boolean addBreakOff(E value) {
+		Node newNode = new Node(breakoff.previous(), breakoff, value);
+		breakoff.previous().setNext(newNode);
+		breakoff.setPrevious(newNode);
 		size++;
 		return true;
 	}
@@ -83,6 +94,10 @@ class MyLinkedList<E> {
 	}
 	public Node getEnd() {
 		return end;
+	}
+	public void setBreakoff(Node k) {
+		breakoff = k;
+		size = 0;
 	}
 
 	public boolean contains(E value) {
@@ -132,11 +147,15 @@ class MyLinkedList<E> {
 		size += last.size();
 		last.getStart().setNext(last.getEnd());
 		last.getEnd().setPrevious(last.getStart());
+		last.setBreakoff(last.getEnd());
 		current = start;
 	}
 
 	public boolean hasNext() {
 		return current.next() != end;
+	}
+	public boolean hasNeakoff() {
+		return current.next() != breakoff;
 	}
 	public E nextElement() {
 		current = current.next();

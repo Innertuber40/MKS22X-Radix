@@ -22,29 +22,29 @@ public class Radix {
 			for (int i = 0; i < 10; i++) {
 				catted.concat(bucketDump[i]);
 			}
+			System.out.println(catted);
 			while(catted.hasNext()) {
 				int value = catted.nextElement();
 				if (value < 0) {
-					bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addFirst(value);
+					bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10].addBreakOff(value);
+					System.out.println(bucketDump[Math.abs(value) / (int)Math.pow(10, currentLayer) % 10]);
 				} else {
 					bucketDump[value / (int)Math.pow(10, currentLayer) % 10].addLast(value);
 				}
 			}
 			currentLayer++;
 		}
-		int currentIndex = 0;
+		/*MyLinkedList<Integer> catted = new MyLinkedList<Integer>();
 		for (int i = 0; i < 10; i++) {
-			if (bucketDump[i].hasNext()) {
+			catted.concat(bucketDump[i]);
+		}
+		System.out.println(catted);*/
+		int currentIndex = 0;
+		for (int i = 9; i >= 0; i--) {
+			while (bucketDump[i].hasNeakoff()) {
 				int value = bucketDump[i].nextElement();
-				while (value < 0) {
-					data[currentIndex] = value;
-					if (bucketDump[i].hasNext()) {
-						value = bucketDump[i].nextElement();
-					} else {
-						value = 0;
-					}
-					currentIndex++;
-				}
+				data[currentIndex] = value;
+				currentIndex++;
 			}
 		}
 		for (int i = 0; i < 10; i++) {
