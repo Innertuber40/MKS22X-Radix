@@ -15,5 +15,10 @@ public class TestDriver {
 		while (testList.hasNext()) {
 			System.out.println(testList.nextElement());
 		}
+		int[] testInts = new int[] {-645, 500, 43, 0, 0, -1, -9, 8, 9};
+		Radix.radixsort(testInts);
+		for (int i = 0; i < testInts.length; i++) {
+			System.out.print(testInts[i] + " ");
+		}
 	}
 }
